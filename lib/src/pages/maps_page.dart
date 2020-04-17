@@ -4,9 +4,11 @@ import 'package:qr_reader_flutter/src/models/scan_model.dart';
 import 'package:qr_reader_flutter/src/utils/utils.dart' as utils;
 
 class MapsPage extends StatelessWidget {
+  final scansBloc = new ScansBloc();
+
   @override
   Widget build(BuildContext context) {
-    final scansBloc = new ScansBloc();
+    scansBloc.getScans();
 
     return StreamBuilder(
       stream: scansBloc.scansStream,
@@ -30,7 +32,7 @@ class MapsPage extends StatelessWidget {
                   onDismissed: (direction) => scansBloc.deleteScan(scans[i].id),
                   child: ListTile(
                     leading: Icon(
-                      Icons.cloud_queue,
+                      Icons.map,
                       color: Theme.of(context).primaryColor,
                     ),
                     title: Text(scans[i].valor),
